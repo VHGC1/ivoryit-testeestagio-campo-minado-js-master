@@ -18,23 +18,28 @@
       // Realize sua codificação a partir deste ponto, boa sorte!
 
       function nd() {
-        let i = 0;
-        while (i != 3 || status === 2) {
-          let tabuleiro = campoMinado.Tabuleiro().split("\r\n");
-          let status = campoMinado.JogoStatus();
-          i++;
-
-          console.log("status", status);
-
-          campoMinado.Abrir(9, i);
-          console.log(tabuleiro);
-          document.getElementById("exibir-execucao").innerHTML +=
-            "<pre>" + campoMinado.Tabuleiro() + "</pre>";
+        let tabuleiro = campoMinado.Tabuleiro().split("\r\n");
+        for (let i = 0; i < 9; i++) {
+          for (let j = 0; j < 9; j++) {
+            if (tabuleiro[i][j] === "-") {
+              campoMinado.Abrir(i + 1, j + 1);
+            }
+          }
+          tabuleiro = campoMinado.Tabuleiro().split("\r\n");
         }
+        return tabuleiro;
+        // while (i != 3 || status === 2) {
+        //   let status = campoMinado.JogoStatus();
+        //   i++;
 
-     
+        //   console.log("status", status);
+
+        //   campoMinado.Abrir(9, i);
+        //   console.log(tabuleiro);
+        //   document.getElementById("exibir-execucao").innerHTML +=
+        //     "<pre>" + campoMinado.Tabuleiro() + "</pre>";
+        // }
       }
-      let status = campoMinado.JogoStatus();
     </script>
   </body>
 </html>
