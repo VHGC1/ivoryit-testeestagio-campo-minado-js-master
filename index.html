@@ -18,24 +18,21 @@
       // Realize sua codificação a partir deste ponto, boa sorte!
 
       function nd() {
-        let tabuleiro = campoMinado.Tabuleiro();
-				let status = campoMinado.JogoStatus()
-				let i = 0;
+        let i = 0;
+        while (i != 3 || status === 2) {
+          let tabuleiro = campoMinado.Tabuleiro().split("\r\n");
+          let status = campoMinado.JogoStatus();
+          i++;
 
-				console.log(tabuleiro.split(""))
-				// while(status =! 2) {
-				// 	i++;
+          console.log("status", status);
 
-				// } 
-				
+          campoMinado.Abrir(9, i);
+          console.log(tabuleiro);
+          document.getElementById("exibir-execucao").innerHTML +=
+            "<pre>" + campoMinado.Tabuleiro() + "</pre>";
+        }
 
-        // for(let i = 4; i < 10; i++) {
-        // 	document.getElementById("exibir-execucao").innerHTML +=
-        // "<pre>" + campoMinado.Tabuleiro() + "</pre>";
-        // 	for(let j = 1; j < 10; j++) {
-        // 		campoMinado.Abrir(i, j);
-        // 	}
-        // }
+     
       }
       let status = campoMinado.JogoStatus();
     </script>
