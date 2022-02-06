@@ -17,6 +17,19 @@
 
       // Realize sua codificação a partir deste ponto, boa sorte!
 
+      const status = () => {
+        let status = campoMinado.JogoStatus();
+        if (status === 0) {
+          return "Em execução!";
+        }
+        if (status === 1) {
+          return "Vitoria!";
+        }
+        if (status === 2) {
+          return "Derrota";
+        }
+      };
+
       function nd() {
         let tabuleiro = campoMinado.Tabuleiro().split("\r\n");
 
@@ -50,32 +63,34 @@
             let coluna = j + 1;
 
             tabuleiro = campoMinado.Tabuleiro().split("\r\n");
-            if (tabuleiro[i][j] === "-") {    
+            if (tabuleiro[i][j] === "-") {
               console.log(`linha ${linha} coluna ${coluna}`);
 
+              /*DETERMINAR AS ELEMENTOS DAS CASAS ADJACENTES  */
+
               // Primeira linha
-              if(i === 0) {
+              if (i === 0) {
                 diagonalSupEsq = null;
-                superior = null
-                diagonalInfDir = null
-              } 
+                superior = null;
+                diagonalInfDir = null;
+              }
               // Ultima linha
-              if(i === 8) {
-                diagonalInfEsq = null
-                inferior = null
-                diagonalSupDir = null
+              if (i === 8) {
+                diagonalInfEsq = null;
+                inferior = null;
+                diagonalSupDir = null;
               }
               // Primeira coluna
-              if(j === 0) {
-                diagonalSupEsq = null
-                esquerda = null
-                diagonalInfEsq = null
+              if (j === 0) {
+                diagonalSupEsq = null;
+                esquerda = null;
+                diagonalInfEsq = null;
               }
               // Segunda Coluna
-              if(j === 8) {
+              if (j === 8) {
                 diagonalSupDir = null;
-                direita = null
-                diagonalInfDir = null
+                direita = null;
+                diagonalInfDir = null;
               }
 
               // Superior
@@ -96,40 +111,54 @@
               }
 
               // Diagonal superior esquerda
-              if(i !== 0 && j !== 0) {
+              if (i !== 0 && j !== 0) {
                 diagonalSupEsq = tabuleiro[i - 1][j - 1];
               }
               // Diagonal superior direita
-              if(i !== 0 && j !== 8) {
+              if (i !== 0 && j !== 8) {
                 diagonalSupDir = tabuleiro[i - 1][j + 1];
               }
               // Diagonal inferior esquerda
-              if(i !== 8 && j !== 0) {
+              if (i !== 8 && j !== 0) {
                 diagonalInfEsq = tabuleiro[i + 1][j - 1];
               }
               // Diagonal inferior direita
-              if(i !== 8 && j !== 8) {
+              if (i !== 8 && j !== 8) {
                 diagonalInfDir = tabuleiro[i + 1][j + 1];
               }
-              
+
+              if (esquerda === "0") {
+                campoMinado.Abrir(linha, coluna);
+              }
+
+              if (
+                !(
+                  esquerda === "1" ||
+                  esquerda === "2" ||
+                  esquerda === "3" ||
+                  esquerda === "4" ||
+                  esquerda === "-"
+                )
+              ) {
+                campoMinado.Abrir(linha, coluna);
+                document.getElementById(
+                  "exibir-execucao"
+                ).innerHTML += `----------- ${status()} ----------- `;
+                document.getElementById("exibir-execucao").innerHTML +=
+                  "<pre>" + campoMinado.Tabuleiro() + "</pre>";
+              }
               console.log(
                 `${diagonalSupEsq} ${superior} ${diagonalSupDir}\n${esquerda} ${tabuleiro[i][j]} ${direita}\n${diagonalInfEsq} ${inferior} ${diagonalInfDir}`
               );
             }
-
-            // if (campoMinado.JogoStatus() === 1) {
-            //   for (let i = 0; i < 9; i++) {
-            //     for (let j = 0; j < 9; j++) {
-            //       let linha = i + 1;
-            //       let coluna = j + 1;
-            //       if (tabuleiro[i][j] === "-") {
-            //         bombas.push(`bomba na linha ${i} e na coluna ${j}`);
-            //       }
-            //     }
-            //   }
-            // }
           }
         }
+
+        document.getElementById(
+          "exibir-execucao"
+        ).innerHTML += `----------- ${status()} ----------- `;
+        document.getElementById("exibir-execucao").innerHTML +=
+          "<pre>" + campoMinado.Tabuleiro() + "</pre>";
         return tabuleiro;
       }
 
