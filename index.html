@@ -30,10 +30,8 @@
         }
       };
 
-      function nd() {
+      function solver() {
         let tabuleiro = campoMinado.Tabuleiro().split("\r\n");
-
-        let provBomb = [];
 
         let diagonalSupEsq = null;
         let superior = null;
@@ -162,7 +160,7 @@
         return tabuleiro;
       }
 
-      nd();
+      solver();
     </script>
   </body>
 </html>
