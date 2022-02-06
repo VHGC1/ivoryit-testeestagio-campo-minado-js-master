@@ -112,10 +112,6 @@
                 diagonalInfDir = tabuleiro[i + 1][j + 1];
               }
               
-
-              document.getElementById("exibir-execucao").innerHTML +=
-                "<pre>" + campoMinado.Tabuleiro() + "</pre>";
-
               console.log(
                 `${diagonalSupEsq} ${superior} ${diagonalSupDir}\n${esquerda} ${tabuleiro[i][j]} ${direita}\n${diagonalInfEsq} ${inferior} ${diagonalInfDir}`
               );
