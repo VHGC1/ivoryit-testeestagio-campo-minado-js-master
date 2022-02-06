@@ -19,27 +19,125 @@
 
       function nd() {
         let tabuleiro = campoMinado.Tabuleiro().split("\r\n");
+
+        let provBomb = [];
+
+        let diagonalSupEsq = null;
+        let superior = null;
+        let diagonalSupDir = null;
+
+        let esquerda = null;
+        let direita = null;
+
+        let diagonalInfEsq = null;
+        let inferior = null;
+        let diagonalInfDir = null;
+
+        // diagonalSupEsq = tabuleiro[i - 1][j - 1];
+        // superior = tabuleiro[i - 1][j];
+        // diagonalSupDir = tabuleiro[i - 1][j + 1];
+
+        // esquerda = tabuleiro[i][j - 1];
+        // direita = tabuleiro[i][j + 1];
+
+        // diagonalInfEsq = tabuleiro[i + 1][j - 1];
+        // inferior = tabuleiro[i + 1][j];
+        // diagonalInfDir = tabuleiro[i + 1][j + 1];
+
         for (let i = 0; i < 9; i++) {
           for (let j = 0; j < 9; j++) {
-            if (tabuleiro[i][j] === "-") {
-              campoMinado.Abrir(i + 1, j + 1);
+            let linha = i + 1;
+            let coluna = j + 1;
+
+            tabuleiro = campoMinado.Tabuleiro().split("\r\n");
+            if (tabuleiro[i][j] === "-") {    
+              console.log(`linha ${linha} coluna ${coluna}`);
+
+              // Primeira linha
+              if(i === 0) {
+                diagonalSupEsq = null;
+                superior = null
+                diagonalInfDir = null
+              } 
+              // Ultima linha
+              if(i === 8) {
+                diagonalInfEsq = null
+                inferior = null
+                diagonalSupDir = null
+              }
+              // Primeira coluna
+              if(j === 0) {
+                diagonalSupEsq = null
+                esquerda = null
+                diagonalInfEsq = null
+              }
+              // Segunda Coluna
+              if(j === 8) {
+                diagonalSupDir = null;
+                direita = null
+                diagonalInfDir = null
+              }
+
+              // Superior
+              if (i !== 0) {
+                superior = tabuleiro[i - 1][j];
+              }
+              // Inferior
+              if (i !== 8) {
+                inferior = tabuleiro[i + 1][j];
+              }
+              //esquerda
+              if (j !== 0) {
+                esquerda = tabuleiro[i][j - 1];
+              }
+              //direita
+              if (j !== 8) {
+                direita = tabuleiro[i][j + 1];
+              }
+
+              // Diagonal superior esquerda
+              if(i !== 0 && j !== 0) {
+                diagonalSupEsq = tabuleiro[i - 1][j - 1];
+              }
+              // Diagonal superior direita
+              if(i !== 0 && j !== 8) {
+                diagonalSupDir = tabuleiro[i - 1][j + 1];
+              }
+              // Diagonal inferior esquerda
+              if(i !== 8 && j !== 0) {
+                diagonalInfEsq = tabuleiro[i + 1][j - 1];
+              }
+              // Diagonal inferior direita
+              if(i !== 8 && j !== 8) {
+                diagonalInfDir = tabuleiro[i + 1][j + 1];
+              }
+              
+
+              document.getElementById("exibir-execucao").innerHTML +=
+                "<pre>" + campoMinado.Tabuleiro() + "</pre>";
+
+              console.log(
+                `${diagonalSupEsq} ${superior} ${diagonalSupDir}\n${esquerda} ${tabuleiro[i][j]} ${direita}\n${diagonalInfEsq} ${inferior} ${diagonalInfDir}`
+              );
             }
+
+            // if (campoMinado.JogoStatus() === 1) {
+            //   for (let i = 0; i < 9; i++) {
+            //     for (let j = 0; j < 9; j++) {
+            //       let linha = i + 1;
+            //       let coluna = j + 1;
+            //       if (tabuleiro[i][j] === "-") {
+            //         bombas.push(`bomba na linha ${i} e na coluna ${j}`);
+            //       }
+            //     }
+            //   }
+            // }
           }
-          tabuleiro = campoMinado.Tabuleiro().split("\r\n");
         }
         return tabuleiro;
-        // while (i != 3 || status === 2) {
-        //   let status = campoMinado.JogoStatus();
-        //   i++;
-
-        //   console.log("status", status);
-
-        //   campoMinado.Abrir(9, i);
-        //   console.log(tabuleiro);
-        //   document.getElementById("exibir-execucao").innerHTML +=
-        //     "<pre>" + campoMinado.Tabuleiro() + "</pre>";
-        // }
       }
+
+      nd();
     </script>
   </body>
 </html>
