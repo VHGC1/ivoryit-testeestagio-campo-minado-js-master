@@ -17,6 +17,7 @@
 
       // Realize sua codificação a partir deste ponto, boa sorte!
 
+			// Função para verificar o status do jogo
       const status = () => {
         let status = campoMinado.JogoStatus();
         if (status === 0) {
@@ -31,7 +32,7 @@
       };
 
       function solver() {
-        let tabuleiro = campoMinado.Tabuleiro().split("\r\n");
+        let tabuleiro = campoMinado.Tabuleiro().split("\r\n"); // Transformar a string tabuleiro em um array
 
         let diagonalSupEsq = null;
         let superior = null;
@@ -44,17 +45,6 @@
         let inferior = null;
         let diagonalInfDir = null;
 
-        // diagonalSupEsq = tabuleiro[i - 1][j - 1];
-        // superior = tabuleiro[i - 1][j];
-        // diagonalSupDir = tabuleiro[i - 1][j + 1];
-
-        // esquerda = tabuleiro[i][j - 1];
-        // direita = tabuleiro[i][j + 1];
-
-        // diagonalInfEsq = tabuleiro[i + 1][j - 1];
-        // inferior = tabuleiro[i + 1][j];
-        // diagonalInfDir = tabuleiro[i + 1][j + 1];
-
         for (let i = 0; i < 9; i++) {
           for (let j = 0; j < 9; j++) {
             let linha = i + 1;
@@ -64,7 +54,7 @@
             if (tabuleiro[i][j] === "-") {
               console.log(`linha ${linha} coluna ${coluna}`);
 
-              /*DETERMINAR AS ELEMENTOS DAS CASAS ADJACENTES  */
+              /*DETERMINAR OS ELEMENTOS DAS CASAS ADJACENTES E DETERMINAR OS LIMITES DO TABULEIRO */
 
               // Primeira linha
               if (i === 0) {
